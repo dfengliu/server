@@ -570,4 +570,10 @@ show create table t2;
 insert into t2 values (vec_fromtext('[1]'));
 DROP TABLE t1, t2;
 
+--echo #
+--echo # MDEV-39822 MHNSW index returns wrong results for M >= 128
+--echo #
+--error ER_BAD_OPTION_VALUE
+create table t (v vector(1) not null, vector (v) m=200);
+
 --echo # End of 11.8 tests

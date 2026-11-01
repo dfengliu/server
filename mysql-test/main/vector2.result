@@ -715,4 +715,9 @@ t2	CREATE TABLE `t2` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
 insert into t2 values (vec_fromtext('[1]'));
 DROP TABLE t1, t2;
+#
+# MDEV-39822 MHNSW index returns wrong results for M >= 128
+#
+create table t (v vector(1) not null, vector (v) m=200);
+ERROR HY000: Incorrect value '200' for option 'm'
 # End of 11.8 tests
